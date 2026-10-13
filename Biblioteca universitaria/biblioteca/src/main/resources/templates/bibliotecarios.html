@@ -2,38 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>bibliotecarios de la biblioteca</title>
+    <title>Bibliotecarios de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de bibliotecarios</h1>
-    
-    <form th:action="@{/bibliotecarios/guardar}" th:object="${nuevoBibliotecario}" method="post">
-        <label>nombre:</label>
-        <input type="text" th:field="*{nombre}" required>
-        <label>usuario:</label>
-        <input type="text" th:field="*{usuario}" required>
-        <label>contraseña:</label>
-        <input type="password" th:field="*{contrasena}" required>
-        <button type="submit">guardar bibliotecario</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de bibliotecarios</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nombre</th>
-                <th>usuario</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="bib : ${bibliotecarios}">
-                <td th:text="${bib.idBibliotecario}"></td>
-                <td th:text="${bib.nombre}"></td>
-                <td th:text="${bib.usuario}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/bibliotecarios/guardar}" th:object="${nuevoBibliotecario}" method="post">
+                <div>
+                    <label>Nombre:</label>
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+                <div>
+                    <label>Usuario:</label>
+                    <input type="text" th:field="*{usuario}" required>
+                </div>
+                <div>
+                    <label>Contraseña:</label>
+                    <input type="password" th:field="*{contrasena}" required>
+                </div>
+                <div>
+                    <button type="submit">Guardar bibliotecario</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="bib : ${bibliotecarios}">
+                            <td th:text="${bib.idBibliotecario}"></td>
+                            <td th:text="${bib.nombre}"></td>
+                            <td th:text="${bib.usuario}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

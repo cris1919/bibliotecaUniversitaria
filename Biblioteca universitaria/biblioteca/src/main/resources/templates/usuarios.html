@@ -2,58 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>usuarios de la biblioteca</title>
+    <title>Usuarios de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de usuarios</h1>
-    
-    <form th:action="@{/usuarios/guardar}" th:object="${nuevoUsuario}" method="post">
-        <label>codigo:</label>
-        <input type="text" th:field="*{codigo}" required>
-        <label>nombre:</label>
-        <input type="text" th:field="*{nombre}" required>
-        <label>apellidos:</label>
-        <input type="text" th:field="*{apellidos}" required>
-        <label>correo:</label>
-        <input type="email" th:field="*{correo}">
-        <label>tipo:</label>
-        <select name="tipo" required>
-            <option value="ESTUDIANTE">ESTUDIANTE</option>
-            <option value="DOCENTE">DOCENTE</option>
-        </select>
-        <label>estado:</label>
-        <select name="estado" required>
-            <option value="ACTIVO">ACTIVO</option>
-            <option value="INACTIVO">INACTIVO</option>
-        </select>
-        <button type="submit">guardar usuario</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de usuarios</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>codigo</th>
-                <th>nombre</th>
-                <th>apellidos</th>
-                <th>correo</th>
-                <th>tipo</th>
-                <th>estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="usu : ${usuarios}">
-                <td th:text="${usu.idUsuario}"></td>
-                <td th:text="${usu.codigo}"></td>
-                <td th:text="${usu.nombre}"></td>
-                <td th:text="${usu.apellidos}"></td>
-                <td th:text="${usu.correo}"></td>
-                <td th:text="${usu.tipo}"></td>
-                <td th:text="${usu.estado}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/usuarios/guardar}" th:object="${nuevoUsuario}" method="post">
+                <div>
+                    <label>Código:</label>
+                    <input type="text" th:field="*{codigo}" required>
+                </div>
+                <div>
+                    <label>Nombre:</label>
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+                <div>
+                    <label>Apellidos:</label>
+                    <input type="text" th:field="*{apellidos}" required>
+                </div>
+                <div>
+                    <label>Correo:</label>
+                    <input type="email" th:field="*{correo}">
+                </div>
+                <div>
+                    <label>Tipo:</label>
+                    <select name="tipo" required>
+                        <option value="ESTUDIANTE">ESTUDIANTE</option>
+                        <option value="DOCENTE">DOCENTE</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Estado:</label>
+                    <select name="estado" required>
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="INACTIVO">INACTIVO</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Guardar usuario</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usu : ${usuarios}">
+                            <td th:text="${usu.idUsuario}"></td>
+                            <td th:text="${usu.codigo}"></td>
+                            <td th:text="${usu.nombre}"></td>
+                            <td th:text="${usu.apellidos}"></td>
+                            <td th:text="${usu.correo}"></td>
+                            <td th:text="${usu.tipo}"></td>
+                            <td th:text="${usu.estado}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

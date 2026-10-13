@@ -2,58 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>libros de la biblioteca</title>
+    <title>Libros de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de libros</h1>
-    
-    <form th:action="@{/libros/guardar}" th:object="${nuevoLibro}" method="post">
-        <label>isbn:</label>
-        <input type="text" th:field="*{isbn}" required>
-        <label>titulo:</label>
-        <input type="text" th:field="*{titulo}" required>
-        <label>editorial:</label>
-        <input type="text" th:field="*{editorial}">
-        <label>año:</label>
-        <input type="number" th:field="*{anio}">
-        <label>categoria:</label>
-        <select name="categoria.idCategoria" required>
-            <option th:each="cat : ${categorias}" th:value="${cat.idCategoria}" th:text="${cat.nombre}"></option>
-        </select>
-        <label>autores:</label>
-        <select name="autoresIds" multiple>
-            <option th:each="aut : ${autores}" th:value="${aut.idAutor}" th:text="${aut.nombre}"></option>
-        </select>
-        <button type="submit">guardar libro</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de libros</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>isbn</th>
-                <th>titulo</th>
-                <th>editorial</th>
-                <th>año</th>
-                <th>categoria</th>
-                <th>autores</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="lib : ${libros}">
-                <td th:text="${lib.idLibro}"></td>
-                <td th:text="${lib.isbn}"></td>
-                <td th:text="${lib.titulo}"></td>
-                <td th:text="${lib.editorial}"></td>
-                <td th:text="${lib.anio}"></td>
-                <td th:text="${lib.categoria.nombre}"></td>
-                <td>
-                    <span th:each="aut, estado : ${lib.autores}" th:text="${aut.nombre + (estado.last ? '' : ', ')}"></span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/libros/guardar}" th:object="${nuevoLibro}" method="post">
+                <div>
+                    <label>ISBN:</label>
+                    <input type="text" th:field="*{isbn}" required>
+                </div>
+                <div>
+                    <label>Título:</label>
+                    <input type="text" th:field="*{titulo}" required>
+                </div>
+                <div>
+                    <label>Editorial:</label>
+                    <input type="text" th:field="*{editorial}">
+                </div>
+                <div>
+                    <label>Año:</label>
+                    <input type="number" th:field="*{anio}">
+                </div>
+                <div>
+                    <label>Categoría:</label>
+                    <select name="categoria.idCategoria" required>
+                        <option th:each="cat : ${categorias}" th:value="${cat.idCategoria}" th:text="${cat.nombre}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Autores:</label>
+                    <select name="autoresIds" multiple>
+                        <option th:each="aut : ${autores}" th:value="${aut.idAutor}" th:text="${aut.nombre}"></option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Guardar libro</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>ISBN</th>
+                            <th>Título</th>
+                            <th>Editorial</th>
+                            <th>Año</th>
+                            <th>Categoría</th>
+                            <th>Autores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="lib : ${libros}">
+                            <td th:text="${lib.idLibro}"></td>
+                            <td th:text="${lib.isbn}"></td>
+                            <td th:text="${lib.titulo}"></td>
+                            <td th:text="${lib.editorial}"></td>
+                            <td th:text="${lib.anio}"></td>
+                            <td th:text="${lib.categoria.nombre}"></td>
+                            <td>
+                                <span th:each="aut, estado : ${lib.autores}" th:text="${aut.nombre + (estado.last ? '' : ', ')}"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

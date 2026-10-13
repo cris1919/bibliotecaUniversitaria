@@ -2,58 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>prestamos de la biblioteca</title>
+    <title>Préstamos de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de prestamos</h1>
-    
-    <form th:action="@{/prestamos/guardar}" th:object="${nuevoPrestamo}" method="post">
-        <label>fecha de prestamo:</label>
-        <input type="date" th:field="*{fechaPrestamo}" required>
-        <label>fecha de vencimiento:</label>
-        <input type="date" th:field="*{fechaVencimiento}" required>
-        <label>usuario:</label>
-        <select name="usuario.idUsuario" required>
-            <option th:each="usu : ${usuarios}" th:value="${usu.idUsuario}" th:text="${usu.codigo + ' - ' + usu.nombre + ' ' + usu.apellidos}"></option>
-        </select>
-        <label>ejemplar:</label>
-        <select name="ejemplar.idEjemplar" required>
-            <option th:each="eje : ${ejemplares}" th:value="${eje.idEjemplar}" th:text="${eje.codigoBarras + ' - ' + eje.libro.titulo}"></option>
-        </select>
-        <label>bibliotecario:</label>
-        <select name="bibliotecario.idBibliotecario" required>
-            <option th:each="bib : ${bibliotecarios}" th:value="${bib.idBibliotecario}" th:text="${bib.nombre}"></option>
-        </select>
-        <button type="submit">guardar prestamo</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de préstamos</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>fecha de prestamo</th>
-                <th>fecha de vencimiento</th>
-                <th>fecha de devolucion</th>
-                <th>estado</th>
-                <th>usuario</th>
-                <th>ejemplar</th>
-                <th>bibliotecario</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="pre : ${prestamos}">
-                <td th:text="${pre.idPrestamo}"></td>
-                <td th:text="${pre.fechaPrestamo}"></td>
-                <td th:text="${pre.fechaVencimiento}"></td>
-                <td th:text="${pre.fechaDevolucion}"></td>
-                <td th:text="${pre.estado}"></td>
-                <td th:text="${pre.usuario.nombre + ' ' + pre.usuario.apellidos}"></td>
-                <td th:text="${pre.ejemplar.codigoBarras}"></td>
-                <td th:text="${pre.bibliotecario.nombre}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/prestamos/guardar}" th:object="${nuevoPrestamo}" method="post">
+                <div>
+                    <label>Fecha de préstamo:</label>
+                    <input type="date" th:field="*{fechaPrestamo}" required>
+                </div>
+                <div>
+                    <label>Fecha de vencimiento:</label>
+                    <input type="date" th:field="*{fechaVencimiento}" required>
+                </div>
+                <div>
+                    <label>Usuario:</label>
+                    <select name="usuario.idUsuario" required>
+                        <option th:each="usu : ${usuarios}" th:value="${usu.idUsuario}" th:text="${usu.codigo + ' - ' + usu.nombre + ' ' + usu.apellidos}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Ejemplar:</label>
+                    <select name="ejemplar.idEjemplar" required>
+                        <option th:each="eje : ${ejemplares}" th:value="${eje.idEjemplar}" th:text="${eje.codigoBarras + ' - ' + eje.libro.titulo}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Bibliotecario:</label>
+                    <select name="bibliotecario.idBibliotecario" required>
+                        <option th:each="bib : ${bibliotecarios}" th:value="${bib.idBibliotecario}" th:text="${bib.nombre}"></option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Guardar préstamo</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha de préstamo</th>
+                            <th>Fecha de vencimiento</th>
+                            <th>Fecha de devolución</th>
+                            <th>Estado</th>
+                            <th>Usuario</th>
+                            <th>Ejemplar</th>
+                            <th>Bibliotecario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pre : ${prestamos}">
+                            <td th:text="${pre.idPrestamo}"></td>
+                            <td th:text="${pre.fechaPrestamo}"></td>
+                            <td th:text="${pre.fechaVencimiento}"></td>
+                            <td th:text="${pre.fechaDevolucion}"></td>
+                            <td th:text="${pre.estado}"></td>
+                            <td th:text="${pre.usuario.nombre + ' ' + pre.usuario.apellidos}"></td>
+                            <td th:text="${pre.ejemplar.codigoBarras}"></td>
+                            <td th:text="${pre.bibliotecario.nombre}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

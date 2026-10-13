@@ -2,32 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>autores de la biblioteca</title>
+    <title>Autores de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de autores</h1>
-    
-    <form th:action="@{/autores/guardar}" th:object="${nuevoAutor}" method="post">
-        <label>nombre del autor:</label>
-        <input type="text" th:field="*{nombre}" required>
-        <button type="submit">guardar autor</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de autores</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aut : ${autores}">
-                <td th:text="${aut.idAutor}"></td>
-                <td th:text="${aut.nombre}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/autores/guardar}" th:object="${nuevoAutor}" method="post">
+                <div>
+                    <label>Nombre del autor:</label>
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+                <div>
+                    <button type="submit">Guardar autor</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="aut : ${autores}">
+                            <td th:text="${aut.idAutor}"></td>
+                            <td th:text="${aut.nombre}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

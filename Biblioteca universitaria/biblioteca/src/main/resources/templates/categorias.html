@@ -2,32 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>categorias de la biblioteca</title>
+    <title>Categorías de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de categorias</h1>
-    
-    <form th:action="@{/categorias/guardar}" th:object="${nuevaCategoria}" method="post">
-        <label>nombre de categoria:</label>
-        <input type="text" th:field="*{nombre}" required>
-        <button type="submit">guardar categoria</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de categorías</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="cat : ${categorias}">
-                <td th:text="${cat.idCategoria}"></td>
-                <td th:text="${cat.nombre}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/categorias/guardar}" th:object="${nuevaCategoria}" method="post">
+                <div>
+                    <label>Nombre de la categoría:</label>
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+                <div>
+                    <button type="submit">Guardar categoría</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cat : ${categorias}">
+                            <td th:text="${cat.idCategoria}"></td>
+                            <td th:text="${cat.nombre}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

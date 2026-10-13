@@ -2,46 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ejemplares de la biblioteca</title>
+    <title>Ejemplares de la biblioteca</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>gestion de ejemplares</h1>
-    
-    <form th:action="@{/ejemplares/guardar}" th:object="${nuevoEjemplar}" method="post">
-        <label>codigo de barras:</label>
-        <input type="text" th:field="*{codigoBarras}" required>
-        <label>estado:</label>
-        <select name="estado" required>
-            <option value="DISPONIBLE">DISPONIBLE</option>
-            <option value="PRESTADO">PRESTADO</option>
-            <option value="DANADO">DANADO</option>
-        </select>
-        <label>libro:</label>
-        <select name="libro.idLibro" required>
-            <option th:each="lib : ${libros}" th:value="${lib.idLibro}" th:text="${lib.titulo}"></option>
-        </select>
-        <button type="submit">guardar ejemplar</button>
-    </form>
-    
-    <br>
+    <div class="page-shell">
+        <div class="panel">
+            <h1>Gestión de ejemplares</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>codigo de barras</th>
-                <th>estado</th>
-                <th>libro</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="eje : ${ejemplares}">
-                <td th:text="${eje.idEjemplar}"></td>
-                <td th:text="${eje.codigoBarras}"></td>
-                <td th:text="${eje.estado}"></td>
-                <td th:text="${eje.libro.titulo}"></td>
-            </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/ejemplares/guardar}" th:object="${nuevoEjemplar}" method="post">
+                <div>
+                    <label>Código de barras:</label>
+                    <input type="text" th:field="*{codigoBarras}" required>
+                </div>
+                <div>
+                    <label>Estado:</label>
+                    <select name="estado" required>
+                        <option value="DISPONIBLE">DISPONIBLE</option>
+                        <option value="PRESTADO">PRESTADO</option>
+                        <option value="DANADO">DANADO</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Libro:</label>
+                    <select name="libro.idLibro" required>
+                        <option th:each="lib : ${libros}" th:value="${lib.idLibro}" th:text="${lib.titulo}"></option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Guardar ejemplar</button>
+                </div>
+            </form>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Código de barras</th>
+                            <th>Estado</th>
+                            <th>Libro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="eje : ${ejemplares}">
+                            <td th:text="${eje.idEjemplar}"></td>
+                            <td th:text="${eje.codigoBarras}"></td>
+                            <td th:text="${eje.estado}"></td>
+                            <td th:text="${eje.libro.titulo}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
