@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>usuarios de la biblioteca</title>
+</head>
+<body>
+    <h1>gestion de usuarios</h1>
+    
+    <form th:action="@{/usuarios/guardar}" th:object="${nuevoUsuario}" method="post">
+        <label>codigo:</label>
+        <input type="text" th:field="*{codigo}" required>
+        <label>nombre:</label>
+        <input type="text" th:field="*{nombre}" required>
+        <label>apellidos:</label>
+        <input type="text" th:field="*{apellidos}" required>
+        <label>correo:</label>
+        <input type="email" th:field="*{correo}">
+        <label>tipo:</label>
+        <select name="tipo" required>
+            <option value="ESTUDIANTE">ESTUDIANTE</option>
+            <option value="DOCENTE">DOCENTE</option>
+        </select>
+        <label>estado:</label>
+        <select name="estado" required>
+            <option value="ACTIVO">ACTIVO</option>
+            <option value="INACTIVO">INACTIVO</option>
+        </select>
+        <button type="submit">guardar usuario</button>
+    </form>
+    
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>codigo</th>
+                <th>nombre</th>
+                <th>apellidos</th>
+                <th>correo</th>
+                <th>tipo</th>
+                <th>estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="usu : ${usuarios}">
+                <td th:text="${usu.idUsuario}"></td>
+                <td th:text="${usu.codigo}"></td>
+                <td th:text="${usu.nombre}"></td>
+                <td th:text="${usu.apellidos}"></td>
+                <td th:text="${usu.correo}"></td>
+                <td th:text="${usu.tipo}"></td>
+                <td th:text="${usu.estado}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

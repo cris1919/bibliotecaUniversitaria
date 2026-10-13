@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ejemplares de la biblioteca</title>
+</head>
+<body>
+    <h1>gestion de ejemplares</h1>
+    
+    <form th:action="@{/ejemplares/guardar}" th:object="${nuevoEjemplar}" method="post">
+        <label>codigo de barras:</label>
+        <input type="text" th:field="*{codigoBarras}" required>
+        <label>estado:</label>
+        <select name="estado" required>
+            <option value="DISPONIBLE">DISPONIBLE</option>
+            <option value="PRESTADO">PRESTADO</option>
+            <option value="DANADO">DANADO</option>
+        </select>
+        <label>libro:</label>
+        <select name="libro.idLibro" required>
+            <option th:each="lib : ${libros}" th:value="${lib.idLibro}" th:text="${lib.titulo}"></option>
+        </select>
+        <button type="submit">guardar ejemplar</button>
+    </form>
+    
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>codigo de barras</th>
+                <th>estado</th>
+                <th>libro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="eje : ${ejemplares}">
+                <td th:text="${eje.idEjemplar}"></td>
+                <td th:text="${eje.codigoBarras}"></td>
+                <td th:text="${eje.estado}"></td>
+                <td th:text="${eje.libro.titulo}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

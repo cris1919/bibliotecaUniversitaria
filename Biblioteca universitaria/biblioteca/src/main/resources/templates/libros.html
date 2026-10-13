@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>libros de la biblioteca</title>
+</head>
+<body>
+    <h1>gestion de libros</h1>
+    
+    <form th:action="@{/libros/guardar}" th:object="${nuevoLibro}" method="post">
+        <label>isbn:</label>
+        <input type="text" th:field="*{isbn}" required>
+        <label>titulo:</label>
+        <input type="text" th:field="*{titulo}" required>
+        <label>editorial:</label>
+        <input type="text" th:field="*{editorial}">
+        <label>año:</label>
+        <input type="number" th:field="*{anio}">
+        <label>categoria:</label>
+        <select name="categoria.idCategoria" required>
+            <option th:each="cat : ${categorias}" th:value="${cat.idCategoria}" th:text="${cat.nombre}"></option>
+        </select>
+        <label>autores:</label>
+        <select name="autoresIds" multiple>
+            <option th:each="aut : ${autores}" th:value="${aut.idAutor}" th:text="${aut.nombre}"></option>
+        </select>
+        <button type="submit">guardar libro</button>
+    </form>
+    
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>isbn</th>
+                <th>titulo</th>
+                <th>editorial</th>
+                <th>año</th>
+                <th>categoria</th>
+                <th>autores</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="lib : ${libros}">
+                <td th:text="${lib.idLibro}"></td>
+                <td th:text="${lib.isbn}"></td>
+                <td th:text="${lib.titulo}"></td>
+                <td th:text="${lib.editorial}"></td>
+                <td th:text="${lib.anio}"></td>
+                <td th:text="${lib.categoria.nombre}"></td>
+                <td>
+                    <span th:each="aut, estado : ${lib.autores}" th:text="${aut.nombre + (estado.last ? '' : ', ')}"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>bibliotecarios de la biblioteca</title>
+</head>
+<body>
+    <h1>gestion de bibliotecarios</h1>
+    
+    <form th:action="@{/bibliotecarios/guardar}" th:object="${nuevoBibliotecario}" method="post">
+        <label>nombre:</label>
+        <input type="text" th:field="*{nombre}" required>
+        <label>usuario:</label>
+        <input type="text" th:field="*{usuario}" required>
+        <label>contraseña:</label>
+        <input type="password" th:field="*{contrasena}" required>
+        <button type="submit">guardar bibliotecario</button>
+    </form>
+    
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="bib : ${bibliotecarios}">
+                <td th:text="${bib.idBibliotecario}"></td>
+                <td th:text="${bib.nombre}"></td>
+                <td th:text="${bib.usuario}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

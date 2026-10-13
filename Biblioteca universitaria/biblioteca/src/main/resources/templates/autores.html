@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>autores de la biblioteca</title>
+</head>
+<body>
+    <h1>gestion de autores</h1>
+    
+    <form th:action="@{/autores/guardar}" th:object="${nuevoAutor}" method="post">
+        <label>nombre del autor:</label>
+        <input type="text" th:field="*{nombre}" required>
+        <button type="submit">guardar autor</button>
+    </form>
+    
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aut : ${autores}">
+                <td th:text="${aut.idAutor}"></td>
+                <td th:text="${aut.nombre}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
